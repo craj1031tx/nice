@@ -1,0 +1,46 @@
+<html>
+  <head>
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#create_note').submit(function(){
+				$.post('/process/create', $(this).serialize(), function(create_res){
+						$("#notes_area").html(create_res);
+				});
+				return false;
+			});
+			$('#notes_area').on('submit', 'form.delete_note', function(){
+				alert('hello')		
+					$.post('/process/delete', $(this).serialize(), function(delete_res){
+					$("#notes_area").html(delete_res);
+					});
+					return false;
+			})
+			
+		});
+	</script>
+  </head>
+  <body>
+	<h1>Welcome to the Sticky Notes App!</h1><hr>
+	<h2>Add a note here!</h2>
+	<div class="create_class">
+		<form id="create_note">
+			<label>Name: <br><input type="text" name="name" placeholder="Enter a name!"></label><br>
+			<label>Content: <br></label><br><br>
+			<label>
+			<textarea form="create_note" rows="5" cols="50" name="content" placeholder="Enter a description!"></textarea><br>
+			<input type="submit" name="submit_create" value="create note!"></label>
+		</form>
+	</div>
+	<hr>
+	<h2>Here are your notes:</h2>
+	<div id="notes_area">
+	{%for note in response%}
+		<p>Name: {{note['name']}}</p>
+		<p>Content: <br><textarea rows="5" cols="50">{{note['content']}}</textarea></p>
+		<form class="delete_note"><input type="submit" name="submit_delete" value="Delete Note."><input type="hidden" name="id" value="{{note['id']}}"></form>
+	{%endfor%}
+	</div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+  <head>
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>
+	{%for note in response%}
+		<p>Name: {{note['name']}}</p>
+		<p>Content: <br><textarea rows="5" cols="50">{{note['content']}}</textarea></p>
+		<form class="delete_note"><input type="submit" name="submit_delete" value="Delete Note."><input type="hidden" name="id" value="{{note['id']}}"></form>
+	{%endfor%}
+  </body>
+</html>

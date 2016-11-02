@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button Fun page...</title>
+	<script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+	<script>
+		$(document).ready(function(){
+			$('#the_button').click(function(){
+				$('#the_button').toggleClass('blue');
+			})
+			$('#the_button').hover(function(){
+				$(this).addClass('green');
+				$(this).removeClass('red');
+			}, function(){
+				$(this).removeClass('green');
+			});
+		});
+	</script>
+	<style type="text/css">
+		button{
+			background-color: red;
+		}
+		.blue{
+			background-color: blue;
+		}
+		.green{
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<button id="the_button">My button</button>
+</body>
+</html>

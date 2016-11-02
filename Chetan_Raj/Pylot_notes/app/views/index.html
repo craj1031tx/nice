@@ -1,0 +1,33 @@
+<html>
+  <head>
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#add_quote').submit(function(){
+				$.post('/process/create', $(this).serialize(), function(res){
+						$('.notes').html(res)
+				});
+				return false
+			});
+		});
+	</script>
+  </head>
+  <body>
+	<h1>Welcome to our notes app...</h1><hr>
+	<h3>Enter a new note here:</h3>
+	<form action="/process/create" method="post" id="add_quote"> 
+		Title: <input type="text" name="name"><br>
+		Content: <input type="text" name="content"><br>
+		<input type="submit" name="submit_note" value="add note.">
+	</form>
+	<h1>Here are your notes:</h1>
+	<div class="notes">
+		{%for var in notes%}
+			Name: {{var['name']}}
+			Content: {{var['content']}}
+			<hr>
+		{%endfor%}
+	</div>
+  </body>
+</html>
